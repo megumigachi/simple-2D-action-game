@@ -1,9 +1,13 @@
-# simple-2D-action-game
-project for software engineering course
+# Trigasion（暂定） 
+
+`smite the enemy`
+
+## simple-2D-action-game
+
+> project for software engineering course
 
 
 ## the art resources:
-
 
 https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360
 https://assetstore.unity.com/packages/2d/characters/pixel-adventure-2-155418
