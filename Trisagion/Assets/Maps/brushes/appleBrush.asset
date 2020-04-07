@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdc5e1eccedb29e4894bbfab99032590, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
   m_Name: appleBrush
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_Tile: {fileID: 0}
+  - m_Tile: {fileID: 11400000, guid: 1483e5a57959f5b45aa048cca4dbd7a2, type: 2}
     m_Matrix:
       e00: 1
       e01: 0
@@ -36,6 +36,6 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
-  m_Prefabs:
-  - {fileID: 3144219470476721961, guid: a952d57d4fcd7a14cb4c0f9bc83c90ba, type: 3}
-  m_PerlinScale: 0.5
+  m_Prefab: {fileID: 3144219470476721961, guid: a952d57d4fcd7a14cb4c0f9bc83c90ba,
+    type: 3}
+  m_ForceDelete: 0

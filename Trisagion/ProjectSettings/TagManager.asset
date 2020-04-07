@@ -4,14 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< Updated upstream
-  - Enemy
-=======
-  - Collections
   - Collections1
-  - Collections2
+  - Enemy
   - Traps
->>>>>>> Stashed changes
+  - Collections2
+  - Collections
   layers:
   - Default
   - TransparentFX
@@ -21,13 +18,8 @@ TagManager:
   - UI
   - 
   - 
-<<<<<<< Updated upstream
   - ground
   - player
-=======
-  - Ground
-  - Collections
->>>>>>> Stashed changes
   - 
   - 
   - 
@@ -54,9 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
-    uniqueID: 2719666845
+  - name: background
+    uniqueID: 1043570357
     locked: 0
-  - name: Frontground
-    uniqueID: 1664001249
+  - name: frontground
+    uniqueID: 1454133029
     locked: 0

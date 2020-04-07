@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdc5e1eccedb29e4894bbfab99032590, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
   m_Name: cherryBrush
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_Tile: {fileID: 11400000, guid: fd9a71bc91099684e8e71de5a9da3f52, type: 2}
+  - m_Tile: {fileID: 0}
     m_Matrix:
       e00: 1
       e01: 0
@@ -36,6 +36,5 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
-  m_Prefabs:
-  - {fileID: 708365442497195005, guid: e5162eff54c60f944ac1f8b7c9ab4cea, type: 3}
-  m_PerlinScale: 0.5
+  m_Prefab: {fileID: 708365442497195005, guid: e5162eff54c60f944ac1f8b7c9ab4cea, type: 3}
+  m_ForceDelete: 0

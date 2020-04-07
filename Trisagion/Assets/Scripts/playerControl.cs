@@ -8,16 +8,16 @@ public class playerControl : MonoBehaviour
     private Rigidbody2D Rb2D;
     private Animator anim;
 
-    public float speed;
-    public float jumpForce;
     public Transform groundCheck;
     public LayerMask ground;
     public Text scoresText;
     public Text hpText;
 
-    [SerializeField]private int  score = 0;
-
-    int playerHp = 3;
+    bool hitEnemy = false;
+    int  score = 0;
+    float speed = 8;
+    float jumpForce = 12;
+    int playerHp = 99;
     bool isGround,isFall;
     bool jumpPressed;
     int jumpCount = 2;
@@ -145,6 +145,12 @@ public class playerControl : MonoBehaviour
         if (isHurt) { return; }
         switch (collision.tag)
         {
+            case "Enemy":
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                enemy.Hurt();
+                Rb2D.velocity = new Vector2(Rb2D.velocity.x, jumpForce-2);
+                Debug.Log(collision.gameObject);
+                break;
             case "Collections2":
                 collision.GetComponent<BoxCollider2D>().enabled = false;
                 collision.SendMessage("SwitchAnim");
@@ -188,14 +194,29 @@ public class playerControl : MonoBehaviour
                 break;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if(collision.gameObject.tag == "Enemy")
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.Hurt();
-            Debug.Log(collision.gameObject);
+            isHurt = true;
+            playerHp--;
+            hpText.text = "Hp:" + playerHp.ToString();
+            if (transform.position.x < collision.gameObject.transform.position.x)
+            {
+                Rb2D.velocity = new Vector2(-5, Rb2D.velocity.y);
+            }
+            else if (transform.position.x > collision.gameObject.transform.position.x)
+            {
+                Rb2D.velocity = new Vector2(5, Rb2D.velocity.y);
+            }
+            if (transform.position.y < collision.gameObject.transform.position.y)
+            {
+                Rb2D.velocity = new Vector2(Rb2D.velocity.x, -5);
+            }
+            else if (transform.position.y > collision.gameObject.transform.position.y)
+            {
+                Rb2D.velocity = new Vector2(Rb2D.velocity.x, 5);
+            }
         }
     }
 }
