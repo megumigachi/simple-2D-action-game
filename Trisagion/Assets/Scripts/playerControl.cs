@@ -184,14 +184,18 @@ public class playerControl : MonoBehaviour
                     Rb2D.velocity = new Vector2(Rb2D.velocity.x, 5);
                 }
                 break;
-            case "Enemy":
-                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                enemy.Hurt();
-                Debug.Log(collision.gameObject);
-                break;
-
             default:
                 break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.Hurt();
+            Debug.Log(collision.gameObject);
         }
     }
 }
