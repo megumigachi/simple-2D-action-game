@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_AngryPig : MonoBehaviour
+
+public class Enemy_AngryPig : Enemy
 {
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rb;
+    private Collider2D coll;
 
     public Transform leftpoint, rightpoint;
 
     private float leftx, rightx;
 
-    public float speed, runningSpeed, interval;
+    public float speed, runningSpeed;
+    public int interval;
+    private int initInterval;
 
-    private bool faceleft = true;
+    private bool faceleft = true, rage, invincible;
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        base.Start();
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
+
+        initInterval = interval;
+
         leftx = leftpoint.position.x;
         rightx = rightpoint.position.x;
         Destroy(leftpoint.gameObject);
@@ -26,28 +36,103 @@ public class Enemy_AngryPig : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        if (interval <= 0)
+        {
+            Movement();
+        }
+        else if (rage)
+        {
+            Movement_rage();
+        }
     }
 
     void Movement()
     {
+        animator.SetBool(AnimParam.Idel, false);
+        animator.SetBool(AnimParam.Walk, true);
         if (faceleft)
         {
-            rigidbody.velocity = new Vector2(-speed * Time.deltaTime, rigidbody.velocity.y);
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
             if (transform.position.x < leftx)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
+                rb.velocity = new Vector2(0, rb.velocity.y);
+                faceleft = false;
+                animator.SetBool(AnimParam.Idel, true);
+                animator.SetBool(AnimParam.Walk, false);
+                interval = initInterval;
+            }
+        }
+        else
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+            if (transform.position.x > rightx)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                rb.velocity = new Vector2(0, rb.velocity.y);
+                faceleft = true;
+                animator.SetBool(AnimParam.Idel, true);
+                animator.SetBool(AnimParam.Walk, false);
+                interval = initInterval;
+            }
+        }
+    }
+
+    void Movement_rage()
+    {
+        if (faceleft)
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            if (transform.position.x < leftx)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                rb.velocity = new Vector2(0, rb.velocity.y);
                 faceleft = false;
             }
         }
         else
         {
-            rigidbody.velocity = new Vector2(speed * Time.deltaTime, rigidbody.velocity.y);
+            rb.velocity = new Vector2(speed, rb.velocity.y);
             if (transform.position.x > rightx)
             {
                 transform.localScale = new Vector3(1, 1, 1);
+                rb.velocity = new Vector2(0, rb.velocity.y);
                 faceleft = true;
             }
         }
     }
+
+    public override void Hurt()
+    {
+        if (!invincible)
+        {
+            if (rage)
+            {
+                rb.isKinematic = true;
+                coll.enabled = false;
+            }
+            base.Hurt();
+            rb.velocity = new Vector2(0, 0);
+            // Never stop to relax
+            interval = 1;
+            // Stand for a while
+            rage = false;
+            // More difficult
+            invincible = true;
+        }
+    }
+
+    void PerpareWalk()
+    {
+        interval--;
+    }
+
+    void Rage()
+    {
+        rage = true;
+        invincible = false;
+        animator.ResetTrigger(AnimParam.Hurt);
+        animator.SetBool(AnimParam.Run, true);
+    }
+
 }

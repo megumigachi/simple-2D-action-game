@@ -1932,5 +1932,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: AngryPig
       objectReference: {fileID: 0}
+    - target: {fileID: 5984885820404242738, guid: af713ac73797f4c67ae9b3294cd9efbf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984885820404242766, guid: af713ac73797f4c67ae9b3294cd9efbf,
+        type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984885820404242766, guid: af713ac73797f4c67ae9b3294cd9efbf,
+        type: 3}
+      propertyPath: runningSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984885820404242766, guid: af713ac73797f4c67ae9b3294cd9efbf,
+        type: 3}
+      propertyPath: interval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984885820404242767, guid: af713ac73797f4c67ae9b3294cd9efbf,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984885821361592419, guid: af713ac73797f4c67ae9b3294cd9efbf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.21
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af713ac73797f4c67ae9b3294cd9efbf, type: 3}
