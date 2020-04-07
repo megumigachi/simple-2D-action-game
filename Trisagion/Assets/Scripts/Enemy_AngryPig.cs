@@ -6,7 +6,8 @@ using UnityEngine;
 public class Enemy_AngryPig : Enemy
 {
     private Rigidbody2D rb;
-    private Collider2D coll;
+    private CapsuleCollider2D bodyColl;
+    private EdgeCollider2D headColl;
 
     public Transform leftpoint, rightpoint;
 
@@ -23,7 +24,8 @@ public class Enemy_AngryPig : Enemy
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
+        bodyColl = GetComponent<CapsuleCollider2D>();
+        headColl = GetComponent<EdgeCollider2D>();
 
         initInterval = interval;
 
@@ -48,7 +50,7 @@ public class Enemy_AngryPig : Enemy
 
     void Movement()
     {
-        animator.SetBool(AnimParam.Idel, false);
+        animator.SetBool(AnimParam.Idle, false);
         animator.SetBool(AnimParam.Walk, true);
         if (faceleft)
         {
@@ -58,7 +60,7 @@ public class Enemy_AngryPig : Enemy
                 transform.localScale = new Vector3(-1, 1, 1);
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 faceleft = false;
-                animator.SetBool(AnimParam.Idel, true);
+                animator.SetBool(AnimParam.Idle, true);
                 animator.SetBool(AnimParam.Walk, false);
                 interval = initInterval;
             }
@@ -71,7 +73,7 @@ public class Enemy_AngryPig : Enemy
                 transform.localScale = new Vector3(1, 1, 1);
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 faceleft = true;
-                animator.SetBool(AnimParam.Idel, true);
+                animator.SetBool(AnimParam.Idle, true);
                 animator.SetBool(AnimParam.Walk, false);
                 interval = initInterval;
             }
@@ -109,10 +111,11 @@ public class Enemy_AngryPig : Enemy
             if (rage)
             {
                 rb.isKinematic = true;
-                coll.enabled = false;
+                bodyColl.enabled = false;
+                headColl.enabled = false;
             }
             base.Hurt();
-            rb.velocity = new Vector2(0, 0);
+            rb.velocity = Vector2.zero;
             // Never stop to relax
             interval = 1;
             // Stand for a while
