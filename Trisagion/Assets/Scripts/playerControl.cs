@@ -77,12 +77,13 @@ public class playerControl : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             enemy.Hurt();
+            Debug.Log(collision.gameObject);
         }
     }
 }
